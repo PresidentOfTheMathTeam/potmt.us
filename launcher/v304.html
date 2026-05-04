@@ -1,0 +1,31 @@
+<body style="background-color: #2D3748;">
+    <link rel="icon"
+        href="https://wellesleyps.org/fiske/wp-content/uploads/sites/4/2020/09/powerschool-P-logo-300x300.png"
+        class="favicon">
+    <p style="color: white;">Launcher Version: v3.0.4<br>If the unblocker fails to launch, <a
+            style="color: rgb(182, 200, 234);" href="https://docs.google.com/presentation/d/e/2PACX-1vSUYA460VTB82hoKTiim2v0pPkKRV6hvxw8gN5EeHfc0LlBnLTfaMqgXa-leteQtmzl48E2rESDgVWG/pub?start=false&loop=false&delayms=3000">click
+            here to download the backup version</a></p>
+    <script>
+        fetch("https://potmt.us/launchscripts/lookup.json", { method: 'GET', cache: 'no-store' }).then(response => response.json()).then(lookup => {
+            let script = null;
+            let date = new Date();
+            while (script == null) {
+                let dateString = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+                let scriptAttempt = lookup[dateString];
+                console.log("Attempting date" + dateString + " | result: " + scriptAttempt);
+                if(scriptAttempt) {
+                    script = scriptAttempt;
+                } else {
+                    date.setDate(date.getDate() - 1);
+                    if (date < new Date("2025-01-01")) {
+                        script = "defaultscript.js";
+                    }
+                }
+            }
+
+            fetch("https://potmt.us/launchscripts/" + script).then(response => response.text()).then(data => {
+                eval("var launcherVersion = '3.0.4'; var isLauncherBeta = false;" + data);
+            });
+        });
+    </script>
+</body>

@@ -1,0 +1,96 @@
+<title>JSON Generator | POTMT</title>
+<style>
+    .input-container {
+        width: 500px;
+    }
+
+    .input-container span {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .input-container input {
+        flex: 1;
+        /* Allow the input to take up the remaining space */
+        margin-left: 10px;
+        /* Add some spacing between the text and the input */
+        box-sizing: border-box;
+        /* Ensure padding and borders are included in the width */
+    }
+
+    green {
+        color: green;
+    }
+</style>
+
+
+<div class="input-container">
+    <span>Game Name: <input id="name" type="text" placeholder="Use <br> for new lines, 1-2 words per line"></span><br>
+    <span>Game URL: <input id="url" type="text" placeholder="https://xxx.github.io/game"></span><br>
+    <span>Image Filename: <input id="image" type="text" placeholder="xxxxtitlecard.png"></span><br>
+    <span>Game Description: <input id="desc" type="text" placeholder="Optional, look at the text under more games"></span><br>
+    <span>Alert Message: <input id="alert" type="text" placeholder="Optional alert when opening the game (like tiny fishing)"></span><br>
+    <span>Release Date: <input id="releaseDate" type="date"></span><br>
+</div>
+
+<h1>Output</h1>
+
+<pre id="output">Fill in all the required text to generate the output</pre>
+
+<button onclick="copyOutput();" style="margin-top: 8px;">Copy Text</button>
+
+<script>
+    var outputText = "Fill in all the required text to generate the output";
+
+    function process() {
+        const name = document.getElementById("name").value.replaceAll('"', '\\"');
+        const url = document.getElementById("url").value.replaceAll('"', '\\"');
+        const image = document.getElementById("image").value.replaceAll('"', '\\"');
+        const desc = document.getElementById("desc").value.replaceAll('"', '\\"');
+        const alert = document.getElementById("alert").value.replaceAll('"', '\\"');
+        const releaseDate = document.getElementById("releaseDate").value;
+
+        if (!name || !url || !image) {
+            document.getElementById("output").textContent = "Fill in all the required text to generate the output";
+            return;
+        }
+
+        let output = `{ "id": 0, "name":"${name}", "url": "${url}", "image": "${image}"`
+
+        if (desc) {
+            output += `, "description": "${desc}"`;
+        }
+
+        if (alert) {
+            output += `, "alert": "${alert}"`;
+        }
+
+        if(releaseDate) {
+            output += `, "releaseDate": "${releaseDate}"`;
+        }
+
+        output += ` }`;
+
+        outputText = output;
+
+        document.getElementById("output").textContent = outputText;
+    }
+
+    function copyOutput() {
+        const pre = document.getElementById("output");
+        navigator.clipboard.writeText(outputText);
+        pre.innerHTML = "<green>Copied!</green>";
+        setTimeout(() => {
+            pre.textContent = outputText;
+        }, 1000);
+    };
+
+    document.getElementById("name").addEventListener("input", process);
+    document.getElementById("url").addEventListener("input", process);
+    document.getElementById("image").addEventListener("input", process);
+    document.getElementById("desc").addEventListener("input", process);
+    document.getElementById("alert").addEventListener("input", process);
+    document.getElementById("releaseDate").addEventListener("input", process);
+</script>

@@ -1,0 +1,614 @@
+<html>
+
+<head>
+
+    <title>Home | Schoology</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link id="icon" rel="icon" type="image/x-icon"
+        href="https://wellesleyps.org/fiske/wp-content/uploads/sites/4/2020/09/powerschool-P-logo-300x300.png">
+
+
+    <style>
+        @keyframes glowingborder {
+            0% {
+                border-color: blue;
+            }
+
+            50% {
+                border-color: #1282DF;
+            }
+
+            100% {
+                border-color: blue;
+            }
+        }
+
+        @keyframes rotatebounce {
+            0% {
+                transform: rotate(2.5deg);
+            }
+
+            50% {
+                transform: rotate(-2.5deg);
+            }
+
+            100% {
+                transform: rotate(2.5deg);
+            }
+        }
+
+        #grayTransition {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: #2D3748;
+            transition: 1s;
+            z-index: 9;
+            display: none;
+        }
+
+        #game-selector {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #2D3748;
+            text-align: center;
+            scroll-behavior: auto;
+            overflow: auto;
+            transition: transform .75s, visibility 0s;
+            z-index: 10;
+            visibility: visible;
+        }
+
+        p,
+        a,
+        h1,
+        h2,
+        h3,
+        h4,
+        button,
+        input {
+            color: white;
+            font-family: "Roboto", serif;
+        }
+
+        button {
+            padding: 18px;
+            background-color: #626976;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        #game-selector h1 {
+            font-weight: 900;
+            font-size: 36px;
+        }
+
+        #game-list {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .game-card {
+            width: 136px;
+            height: 200px;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            border-radius: 14px;
+            box-shadow: 0px;
+            border: 8px #626976 solid;
+            transition: .1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            float: left;
+            cursor: pointer;
+            margin: 20px;
+        }
+
+        .game-card:hover {
+            transform: scale(110%);
+            box-shadow: 0 0 20px 8px rgba(255, 255, 255, 0.63);
+            border-color: white;
+            transition: .2s ease-out;
+        }
+
+        .game-card p {
+            text-align: center;
+            font-size: 28px;
+        }
+
+        .game-card p i,
+        .game-card p b {
+            font-size: 14px;
+        }
+
+        .game-card:hover p {
+            transition: .5s;
+            font-size: 33px;
+            animation: rotatebounce infinite 1s linear;
+        }
+
+        .game-card:hover p i {
+            transition: .2s;
+            font-size: 0px;
+        }
+
+        .game-card:hover p b {
+            transition: .2s;
+            font-size: 16px;
+        }
+
+        #game-embed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        #menu {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            background-color: #2D3748;
+            z-index: 5;
+            width: 50px;
+            height: 50px;
+            border-top-left-radius: 18px;
+            border: solid white 5px;
+            border-bottom-width: 0;
+            border-right-width: 0;
+            transition: .5s, display 0s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #menu .options {
+            display: none;
+            transform: rotate(-180deg);
+            opacity: 0;
+            transition: .5s;
+        }
+
+        #menu p {
+            font-size: 36px;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        #menu.enlarged {
+            transform: scale(400%) translate(-20px, -20px);
+            animation: glowingborder infinite .5s linear;
+            cursor: default;
+        }
+
+        #menu:hover {
+            height: auto;
+            display: block;
+            width: auto;
+        }
+        #menu.enlarged:hover { 
+            opacity: 1;
+            width: 50px;
+            height: 50px;
+        }
+
+        #menu:hover .options {
+            display: block;
+            opacity: 1;
+            transform: rotate(0deg);
+            overflow: hidden;
+            padding: 10px 25px;
+        }
+        #menu.enlarged:hover .options { display: none; }
+
+        #menu:hover .options p {
+            text-align: right;
+            font-size: 24px;
+            margin: 4px 0;
+            cursor: pointer;
+            transition: .25s;
+            opacity: .8;
+        }
+        
+        #menu:hover .options p i {
+            margin-left: 5px;
+        }
+
+        #menu:hover .options p:hover {
+            font-weight: 600;
+            opacity: 1;
+        }
+
+        #menu:hover .expand {
+            display: none;
+        }
+        #menu.enlarged:hover .expand { display: block; }
+
+        .title-container {
+            width: 500px;
+        }
+
+        .title-container input[type="text"] {
+            width: 400px;
+            padding: 18px;
+            color: black;
+            border-radius: 14px;
+            border: none;
+            opacity: .7;
+        }
+
+        .title-container input[type="text"]:not(:placeholder-shown) {
+            opacity: 1;
+        }
+
+        .title-container .updatebtn {
+            margin-left: 10px;
+            opacity: .7;
+            cursor: not-allowed;
+            width: 80px;
+        }
+
+        .title-container input[type="text"]:not(:placeholder-shown)+#titlebtn {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .title-container input[type="text"]:not(:placeholder-shown)+#titlebtn:hover {
+            background-color: #7c828d;
+        }
+
+        .title-container .titlepreset {
+            margin: 0 5px;
+        }
+
+        .title-container .titlepreset:hover {
+            background-color: #7c828d;
+        }
+
+        #menutext {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #2D3748;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            z-index: 2;
+            transition: .75s;
+            transition-delay: .25s;
+        }
+
+        #menutext h1 {
+            transition: .75s;
+        }
+
+        #version, #changelog {
+            transition: .25s;
+        }
+
+        #returnToGame {
+            display: none;
+        }
+
+        #returnToGame button {
+            margin: 50px 0 30px 0;
+            font-size: 20px;
+            padding: 24px;
+            border: white solid 4px;
+            background: none;
+            opacity: .8;
+            font-weight: 400;
+        }
+
+        #returnToGame button:hover {
+            opacity: 1;
+            font-weight: 600;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Return to Menu Button -->
+
+    <div id="menu" style="display:none;" class="enlarged" onclick="menuClick();">
+        <p class="expand">&equiv;</p>
+        <div class="options">
+            <p onclick="document.getElementById('game-embed').src = document.getElementById('game-embed').src">Reset Game <i class="fa-solid fa-rotate-right"></i></p>
+            <p onclick="document.getElementById('game-selector').style.display = 'block';">Full Menu <i class="fa-solid fa-up-right-and-down-left-from-center"></i></p>
+        </div>
+    </div>
+
+    <!-- Return to menu text -->
+
+    <div id="menutext">
+        <h1>Use the button on the bottom right to return to the menu!</h1>
+    </div>
+
+    <!-- Game Embed -->
+
+    <iframe id="game-embed" src="about:blank" frameborder="0"></iframe>
+
+    <!-- Main Page -->
+
+    <div id="grayTransition"></div>
+
+    <div id="game-selector">
+
+        <h1>POTMT Unblocker</h1>
+        <p id="version">Checking for updates...</p>
+        <p id="changelog" style="opacity: 0;"></p>
+        <p><a target="_blank"
+                href="https://docs.google.com/document/d/1v9ajotmNecet5XaoecaiNxgn7PdGwP2_-oWqww-sUcU/edit?usp=sharing">Get
+                Support, Report a Bug, or Suggest a Game Here!</a></p>
+
+
+        <div id="returnToGame">
+            <button onclick="document.getElementById('game-selector').style.display = 'none';">&#x2715; Close
+                Menu/Return to Game</button>
+        </div>
+
+        <h2 style="margin-top: 80px;">Select a Game</h2>
+        <span class="title-container">
+            <input type="text" id="urlinput" placeholder="Or type an URL here ( ex. https://example.com )">
+            <button class="updatebtn" id="titlebtn"
+                onclick="if(document.getElementById('urlinput').value.length > 0){updateURL(document.getElementById('urlinput').value);}">Go</button>
+        </span>
+        <div id="game-list">
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/chatgpttitlecard.png')"
+                onclick="updateURL('https://talkai.info/chat')">
+                <p>ChatGPT</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/mototitlecard.png')"
+                onclick="updateURL('https://motox3monline.io/moto-x3m.embed')">
+                <p>Moto<br>X3M</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/ballistictitlecard.png')"
+                onclick="updateURL('https://ubg98.github.io/Ballistic/')">
+                <p>Ballistic</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/run3titlecard.png')"
+                onclick="updateURL('https://fulscreenmario.github.io/originrun/tn6pS9dCf37xAhkJv/')">
+                <p>Run 3</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/slopetitlecard.png')"
+                onclick="updateURL('https://theslope.github.io/games/slope/index.html')">
+                <p>Slope</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/subwaysurferstitlecard.png')"
+                onclick="updateURL('https://coolubg.github.io/coolubg-list/subway-surfers/')">
+                <p>Subway<br>Surfers</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/sandtristitlecard.png')"
+                onclick="updateURL('https://sandtris.com/')">
+                <p>Sandtris</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/bitlifetitlecard.png')"
+                onclick="updateURL('https://xlegends.github.io/bitlife/')">
+                <p>Bitlife</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/stickmantitlecard.png')"
+                onclick="updateURL('https://stickman-hook-game.github.io/file/')">
+                <p>Stickman<br>Hook</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/castletitlecard.png')"
+                onclick="updateURL('https://archive.org/details/Castle_Wolfenstein_1981_Muse')">
+                <p>Castle<br>Wolfen-<br>stein</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/tinyfishingtitlecard.png')"
+                onclick="alert('This game may not save your progress! I can\'t seem to find a fix at the moment, sadly.');updateURL('https://webglmath.github.io/tiny-fishing/');">
+                <p>Tiny<br>Fishing</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/chromedinotitlecard.png')"
+                onclick="updateURL('https://www.tuckercraig.com/dino/')">
+                <p>Chrome<br>Dino<br>Game</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/fireboytitlecard.png')"
+                onclick="updateURL('https://ubg100.github.io/games/fbwg1/index.html')">
+                <p>Fireboy<br>and<br>Watergirl</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/retrobowltitlecard.png')"
+                onclick="updateURL('https://re-trobowl.github.io/file/')">
+                <p>Retro<br>Bowl</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/retrohighwaytitlecard.png')"
+                onclick="updateURL('https://education76.github.io/g177/retro-highway/')">
+                <p>Retro<br>Highway</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/minecrafttitlecard.png')"
+                onclick="alert('Singleplayer WILL take a while to load! Please leave the tab open, it should work eventually!\n\nMost multiplayer servers don\'t work, but you can check if you like!');updateURL('https://sd592g.github.io/zj684od4lfg/');">
+                <p>Minecraft<br>1.5</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/cookietitlecard.png')"
+                onclick="updateURL('https://the.deconstructors.co.uk/tmm-cookieclicker/')">
+                <p>Cookie<br>Clicker</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/bloxorztitlecard.png')"
+                onclick="updateURL('https://education76.github.io/g/bloxorz/')">
+                <p>Bloxorz</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/papaspizzatitlecard.png')"
+                onclick="updateURL('https://archive.org/details/flash_papaspizzeria#')">
+                <p>Papa's<br>Pizza</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/talliotitlecard.png')"
+                onclick="updateURL('https://1001unblockedgames.github.io/TallIO/')">
+                <p>Tall.io</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/yalogamestitlecard.png')"
+                onclick="updateURL('https://hva2021.github.io/2-3-4-player-games/index.html')">
+                <p>2, 3 & 4<br>Player<br>Games</p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/yalogamestitlecard.png')"
+                onclick="updateURL('https://yalogames.github.io/')">
+                <p>More<br>Games<br><b>SITE A</b><i><br>May be<br>glitchier, not<br>fully supported</i></p>
+            </span>
+            <span class="game-card"
+                style="background-image: url('https://presidentofthemathteam.github.io/POTMT/img/yalogamestitlecard.png')"
+                onclick="updateURL('https://ubg98.github.io')">
+                <p>More<br>Games<br><b>SITE B</b><i><br>May be<br>glitchier, not<br>fully supported</i></p>
+            </span>
+        </div>
+        <p>Want another game? Suggest it <a href="https://forms.gle/Cw16KPVqNniCWNhW9" target="_blank">here</a>!</p>
+    </div>
+
+
+    <script>
+
+        var currentVersion = "2.5.2";
+        var versionNumber = 252;
+
+        fetch("https://presidentofthemathteam.github.io/POTMT/updater/number.txt", { cache: "no-store" }).then(responce => {
+            var message = `Current Version: ${currentVersion} - Unable to check for updates, please check the Google Doc below!`;
+            var changelog = "";
+
+            if (responce.ok) {
+                responce.text().then(latestVersion => {
+
+                    console.log(latestVersion.replaceAll('.', ''));
+
+                    if (responce.text.length > 5) {
+                        return;
+                    }
+
+                    if (latestVersion.replaceAll('.', '') > versionNumber) {
+                        console.log("New version avaliable!");
+                        
+                        message = `Current Version: v${currentVersion} - Latest version v${latestVersion} - Update <a href="https://docs.google.com/document/d/1v9ajotmNecet5XaoecaiNxgn7PdGwP2_-oWqww-sUcU/edit?usp=sharing">here</a>!`;
+
+                        fetch("https://presidentofthemathteam.github.io/POTMT/updater/changelog.txt", { cache: "no-store" }).then(responce => {responce.text().then(changelogdata => {
+                            changelog = changelogdata;
+                        })})
+                    
+                    } else if (latestVersion.replaceAll('.', '') == versionNumber) {
+                        
+                        message = `Current Version: v${currentVersion} - You are up to date!`;
+                    
+                    }
+                });
+            }
+
+            setTimeout(() => {
+                document.getElementById("version").style.opacity = 0;
+            }, 750);
+
+            setTimeout(() => {
+                document.getElementById("version").innerHTML = message;
+                document.getElementById("changelog").innerHTML = changelog;
+                document.getElementById("version").style.opacity = 1;
+                document.getElementById("changelog").style.opacity = 1;
+            }, 1000);
+
+        });
+
+        var skipdelay = false;
+
+        function updateURL(url) {
+            if (!skipdelay) {
+                setTimeout(() => {
+                    document.getElementById("menu").classList.remove("enlarged");
+                    document.getElementById("menutext").style.visibility = "hidden";
+                }, 3000)
+                setTimeout(() => {
+                    document.getElementById("menutext").style.opacity = "0";
+                    document.getElementById("menutext").getElementsByTagName("h1")[0].style.fontSize = "0px";
+                }, 2000)
+                skipdelay = true;
+                document.getElementById("game-selector").style.display = "none";
+                document.getElementById("returnToGame").style.display = "block";
+                document.getElementsByTagName("h2")[1].style.marginTop = "20px";
+            } else {
+                smoothClose();
+            }
+            document.getElementById("game-embed").src = url;
+            document.getElementById("menu").style.display = "flex";
+
+        }
+
+
+        function updateTitle(newTitle, favicon) {
+            if(newTitle == null) {
+                return;
+            } else if (newTitle.replaceAll(" ", "") == "") {
+                alert("Please enter a vaild title! Titles cannot be blank!");
+                return updateTitle(prompt('Open the full menu to use presets!\n\nEnter a new name for the tab:'), 'clear');
+            }
+
+            document.title = newTitle;
+            document.getElementById("icon").href = favicon;
+        }
+
+
+        function smoothClose() {
+            document.getElementById("grayTransition").style.display = "block";
+            document.getElementById("returnToGame").style.display = "none";
+            document.getElementById("game-selector").style.transform = "scale(0)";
+            document.getElementById("game-selector").style.overflow = "hidden";
+            setTimeout(() => {
+                document.getElementById("grayTransition").style.opacity = "0";
+            }, 500)
+            setTimeout(() => {
+                document.getElementById("game-selector").style.display = "none";
+                document.getElementById("grayTransition").style.display = "none";
+            }, 1500)
+            setTimeout(() => {
+                document.getElementById("returnToGame").style.display = "block";
+                document.getElementById("game-selector").style.transform = "scale(100%)";
+                document.getElementById("game-selector").style.overflow = "auto";
+                document.getElementById("grayTransition").style.opacity = "1";
+            }, 2000)
+        }
+
+    </script>
+
+
+    <script src="https://kit.fontawesome.com/7a44989741.js" crossorigin="anonymous"></script>
+</body>
+
+<!-- encryption link:    https://www.html-code-generator.com -->
+
+</html>

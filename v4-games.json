@@ -1,0 +1,76 @@
+{
+  "list": [
+    {
+      "name": "Moto X3M",
+      "id": 2,
+      "description": "A thrilling motorcycle racing game with challenging levels and stunts.",
+      "image": "motox3m.png",
+      "color": "#6e8284",
+      "url": "https://unbl0ck.github.io/games/motox3m/index.html"
+    },
+    {
+      "name": "ChatGPT",
+      "id": 1,
+      "description": "An AI-powered chatbot for engaging conversations and assistance.",
+      "image": "chatgpt.png",
+      "color": "#5e5e5e",
+      "url": "https://talkai.info/chat"
+    },
+    {
+      "name": "Ballistic",
+      "id": 3,
+      "description": "Blast through bricks in this action-packed skill game.",
+      "image": "ballistic.jpg",
+      "color": "#47165b",
+      "url": "https://ubg98.github.io/Ballistic/"
+    },
+    {
+      "id": 4,
+      "name": "Run 3",
+      "description": "Navigate through space tunnels in this endless runner game.",
+      "image": "run3.jpg",
+      "color": "#199e9d",
+      "url": "https://fulscreenmario.github.io/originrun/tn6pS9dCf37xAhkJv/"
+    },
+    {
+      "id": 5,
+      "name": "Slope",
+      "description": "A fast-paced 3D game where you control a ball, avoiding obstacles while sliding down a slope.",
+      "image": "slope.png",
+      "color": "#102e0a",
+      "url": "https://theslope.github.io/games/slope/index.html"
+    },
+    {
+      "id": 6,
+      "name": "Subway Surfers",
+      "description": "An endless runner game where you dash through subway tracks, dodging trains and collecting coins.",
+      "image": "surfers.jpg",
+      "color": "#d38247",
+      "url": "https://coolubg.github.io/coolubg-list/subway-surfers/"
+    },
+    {
+      "id": 7,
+      "name": "Sandtris",
+      "description": "A unique twist on the classic Tetris game, indroducing sand physics and gravity.",
+      "image": "sandtris.jpg",
+      "color": "#199e9d",
+      "url": "https://sandtris.com/"
+    },
+    {
+      "id": 8,
+      "name": "Bitlife",
+      "description": "A life simulation game where you make choices and take risks that shape your character's life.",
+      "image": "bitlife.png",
+      "color": "#e64d18",
+      "url": "https://xlegends.github.io/bitlife/"
+    },
+    {
+      "id": 9,
+      "name": "Stickman Hook",
+      "description": "Swing through levels using a grappling hook in this fun and addictive stickman game.",
+      "image": "stickman-hook.jpg",
+      "color": "#0dcbef",
+      "url": "https://mountain-658.github.io/g/stickmanhook/index.html"
+    }
+  ]
+}
