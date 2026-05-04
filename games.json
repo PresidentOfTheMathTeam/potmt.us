@@ -1,0 +1,657 @@
+{
+    "list": [
+        {
+            "name": "Moto X3M",
+            "id": 2,
+            "image": "mototitlecard.png",
+            "url": "https://unbl0ck.github.io/games/motox3m/index.html"
+        },
+        {
+            "name": "ChatGPT",
+            "id": 1,
+            "image": "chatgpttitlecard.png",
+            "url": "https://kimi.com/",
+            "fixedDate": "2025-12-16"
+        },
+        {
+            "name": "Ballistic",
+            "id": 3,
+            "image": "ballistictitlecard.png",
+            "url": "https://ubg98.github.io/Ballistic/"
+        },
+        {
+            "id": 4,
+            "name": "Run 3",
+            "image": "run3titlecard.png",
+            "url": "https://fulscreenmario.github.io/originrun/tn6pS9dCf37xAhkJv/"
+        },
+        {
+            "id": 5,
+            "name": "Slope",
+            "image": "slopetitlecard.png",
+            "url": "https://theslope.github.io/games/slope/index.html"
+        },
+        {
+            "id": 6,
+            "name": "Subway Surfers",
+            "image": "subwaysurferstitlecard.png",
+            "url": "https://coolubg.github.io/coolubg-list/subway-surfers/"
+        },
+        {
+            "id": 7,
+            "name": "Sandtris",
+            "image": "sandtristitlecard.png",
+            "url": "https://sandtris.com/",
+            "alert": "If the game is not fully visible, zoom in and out using CTRL and + or - on your keyboard."
+        },
+        {
+            "id": 8,
+            "name": "Bitlife",
+            "image": "bitlifetitlecard.png",
+            "url": "https://xlegends.github.io/bitlife/"
+        },
+        {
+            "id": 9,
+            "name": "Stickman Hook",
+            "image": "stickmantitlecard.png",
+            "url": "https://mountain-658.github.io/g/stickmanhook/index.html"
+        },
+        {
+            "id": 10,
+            "name": "Castle Wolfenstein",
+            "image": "castletitlecard.png",
+            "url": "https://archive.org/details/Castle_Wolfenstein_1981_Muse"
+        },
+        {
+            "id": 11,
+            "name": "Tiny Fishing",
+            "image": "tinyfishingtitlecard.png",
+            "url": "https://webglmath.github.io/tiny-fishing/",
+            "alert": "This game may not save your progress! I can't seem to find a fix at the moment, sadly."
+        },
+        {
+            "id": 12,
+            "name": "Chrome Dino Game",
+            "image": "chromedinotitlecard.png",
+            "url": "https://www.tuckercraig.com/dino/"
+        },
+        {
+            "id": 13,
+            "name": "Fireboy and Watergirl",
+            "image": "fireboytitlecard.png",
+            "url": "https://ubg100.github.io/games/fbwg1/index.html"
+        },
+        {
+            "id": 14,
+            "name": "Retro Bowl",
+            "image": "retrobowltitlecard.png",
+            "url": "https://javaspence.github.io/retrobowl/",
+            "fixedDate": "2025-10-14"
+        },
+        {
+            "id": 15,
+            "name": "Retro Highway",
+            "image": "retrohighwaytitlecard.png",
+            "url": "https://s.gameszur.com/gamehub/retro-highway/"
+        },
+        {
+            "id": 16,
+            "name": "Minecraft 1.5",
+            "image": "minecrafttitlecard.png",
+            "url": "https://sd592g.github.io/zj684od4lfg/",
+            "alert": "Singleplayer WILL take a while to load! Please leave the tab open, it should work eventually!\n\nMost multiplayer servers don't work, but you can check if you like!"
+        },
+        {
+            "id": 18,
+            "name": "Bloxorz",
+            "image": "bloxorztitlecard.png",
+            "url": "https://ubg89.github.io/Bloxorz/",
+            "alert": "This no longer saves! I'm working on a fix, but for now SAVE YOUR PASSWORD (top right of screen) to resume your game.\n\nThank you!"
+        },
+        {
+            "id": 19,
+            "name": "Papa's Pizza",
+            "image": "papaspizzatitlecard.png",
+            "url": "https://archive.org/details/flash_papaspizzeria#"
+        },
+        {
+            "id": 20,
+            "name": "Tall.io",
+            "image": "talliotitlecard.png",
+            "url": "https://1001unblockedgames.github.io/TallIO/"
+        },
+        {
+            "id": 21,
+            "name": "Crossy Road",
+            "image": "crossyroadtitlecard.png",
+            "url": "https://crossy-road.gitlab.io/file/",
+            "fixedDate": "2025-11-24"
+        },
+        {
+            "id": 22,
+            "name": "Monkey Mart",
+            "image": "monkeymarttitlecard.png",
+            "url": "https://subkeys.github.io/monk/file/"
+        },
+        {
+            "id": 23,
+            "name": "Drift Boss",
+            "image": "driftbosstitlecard.png",
+            "url": "https://unblockedgamesfree.github.io/drift-boss/"
+        },
+        {
+            "id": 24,
+            "name": "Drive Mad",
+            "image": "drivemadtitlecard.png",
+            "url": "https://drive-madgame.github.io/file/",
+            "fixedDate": "2025-09-09"
+        },
+        {
+            "id": 25,
+            "name": "Learn to Fly",
+            "image": "learntoflytitlecard.png",
+            "url": "https://xoriushourz.github.io/LearnToFly/"
+        },
+        {
+            "id": 26,
+            "name": "Wordle Unlimited",
+            "image": "wordleunlimitedtitlecard.png",
+            "url": "https://wordleunlimited.org/"
+        },
+        {
+            "id": 27,
+            "name": "Google Snake",
+            "image": "snaketitlecard.png",
+            "url": "https://googlesnakegameplay.github.io/"
+        },
+        {
+            "id": 28,
+            "name": "Slice Master",
+            "image": "slicemastertitlecard.png",
+            "url": "https://bitlifeonline.github.io/slice-master/"
+        },
+        {
+            "id": 29,
+            "name": "Edge Surf",
+            "image": "edgesurftitlecard.png",
+            "url": "https://threekho.github.io/edgesurf/"
+        },
+        {
+            "id": 30,
+            "name": "Microsoft Solitaire",
+            "image": "solitaretitlecard.png",
+            "url": "https://githubshrub.github.io/html5-games/games/ms-solitaire/"
+        },
+        {
+            "id": 31,
+            "name": "Sugar Sugar",
+            "image": "sugarsugartitlecard.png",
+            "url": "https://g2.igroutka.ru/games/164/LrXRHq7ycBw6bj4P/sugar_sugar/"
+        },
+        {
+            "id": 32,
+            "name": "Paper.io 2",
+            "image": "paperio2titlecard.png",
+            "url": "https://paperio-2.github.io/a9/paper-io-2/"
+        },
+        {
+            "id": 33,
+            "name": "Vex 7",
+            "image": "vex7titlecard.png",
+            "url": "https://hilfig3r.github.io/vex/7/"
+        },
+        {
+            "id": 34,
+            "name": "2048",
+            "image": "2048titlecard.png",
+            "url": "https://ragdoll-archers.github.io/fullscreen/2048-game.html"
+        },
+        {
+            "id": 35,
+            "name": "Johnny Upgrade",
+            "image": "johnnyupgradetitlecard.png",
+            "url": "https://mgalternative.github.io/newgames/johnnyupgrade/index.html"
+        },
+        {
+            "id": 36,
+            "name": "Draw The Hill",
+            "image": "drawthehilltitlecard.png",
+            "url": "https://gnhustgames.github.io/draw-the-hill/"
+        },
+        {
+            "id": 37,
+            "name": "Suika",
+            "image": "sukiatitlecard.png",
+            "url": "https://medallium.github.io/suikagame/",
+            "description": "\"Watermelon Game\""
+        },
+        {
+            "id": 38,
+            "name": "Big Tower<br>Tiny Square",
+            "image": "bttstitlecard.png",
+            "url": "https://ubg98.github.io/BigTowerTinySquare/"
+        },
+        {
+            "id": 39,
+            "name": "Escape Road",
+            "image": "escaperoadtitlecard.png",
+            "url": "https://1games.io/game/escape-road/"
+        },
+        {
+            "id": 40,
+            "name": "Tower of<br>Destiny",
+            "image": "towerofdestinytitlecard.png",
+            "url": "https://unblockedgamesfree.github.io/tower-of-destiny/",
+            "hidden": true
+        },
+        {
+            "id": 41,
+            "name": "Moto X3M",
+            "url": "https://manscod.github.io/other/motox3mpool/",
+            "image": "x3mpoolpartytitlecard.png",
+            "description": "Pool Party<br>Edition"
+        },
+        {
+            "id": 42,
+            "name": "Duck Life",
+            "url": "https://ducklifegame.github.io/file/",
+            "image": "ducklifetitlecard.png"
+        },
+        {
+            "id": 43,
+            "name": "Doodle Jump",
+            "url": "https://zanewesley.github.io/doodlejump/",
+            "image": "doodlejumptitlecard.png"
+        },
+        {
+            "id": 44,
+            "name": "Awesome Tanks",
+            "url": "https://hushygames.github.io/games/awesometanks/game.html",
+            "image": "awesometankstitlecard.png"
+        },
+        {
+            "id": 45,
+            "name": "Basketball Stars",
+            "url": "https://j0n12.github.io/macvg/projects/basketball-stars/game.html",
+            "image": "basketballstarstitlecard.png"
+        },
+        {
+            "id": 46,
+            "name": "8 Ball Pool",
+            "url": "https://8-ball-pool-online.github.io/file/",
+            "image": "8ballpooltitlecard.png"
+        },
+        {
+            "id": 47,
+            "name": "Idle Mining Empire",
+            "url": "https://ubg77.github.io/fix/idle-mining-empire/",
+            "image": "idleminingtitlecard.png"
+        },
+        {
+            "id": 48,
+            "name": "2, 3 & 4<br>Player<br>Games",
+            "image": "yalogamestitlecard.png",
+            "url": "https://hva2021.github.io/2-3-4-player-games/index.html"
+        },
+        {
+            "id": 49,
+            "name": "More<br>Games<br><b>SITE A</b>",
+            "image": "yalogamestitlecard.png",
+            "url": "https://yalogames.github.io/",
+            "description": "May be<br>glitchier, not<br>fully supported"
+        },
+        {
+            "id": 50,
+            "name": "More<br>Games<br><b>SITE B</b>",
+            "image": "yalogamestitlecard.png",
+            "url": "https://ubg98.github.io",
+            "description": "May be<br>glitchier, not<br>fully supported"
+        },
+        {
+            "id": 51,
+            "name": "Duck Life 2",
+            "image": "ducklife2titlecard.png",
+            "url": "https://tylerpalko.github.io/gamehub/ducklife2/"
+        },
+        {
+            "id": 52,
+            "name": "Duck Life 3",
+            "url": "https://tylerpalko.github.io/gamehub/ducklife3/",
+            "image": "ducklife3titlecard.png",
+            "description": "Evolution"
+        },
+        {
+            "id": 53,
+            "name": "Duck Life 4",
+            "url": "https://htmlxm.github.io/h/duck-life-4/",
+            "image": "ducklife4titlecard.png"
+        },
+        {
+            "id": 54,
+            "name": "Duck Life 5",
+            "url": "https://3kh0s.github.io/games/ducklife5/index.html",
+            "image": "ducklife5titlecard.png",
+            "description": "Treasure Hunt"
+        },
+        {
+            "id": 55,
+            "name": "Duck Life 6",
+            "url": "https://wired-potato.github.io/g/ducklife6.html",
+            "image": "ducklife6titlecard.png",
+            "description": "Space"
+        },
+        {
+            "id": 56,
+            "name": "Moto X3M",
+            "url": "https://motox3munblocked.github.io/4-winter/",
+            "image": "motox3mwintertitlecard.png",
+            "description": "Winter Edition"
+        },
+        {
+            "id": 57,
+            "name": "Moto X3M",
+            "url": "https://motox3munblocked.github.io/6-spooky-land/",
+            "image": "motox3mspookytitlecard.png",
+            "description": "Spooky Land Edition"
+        },
+        {
+            "id": 58,
+            "name": "Awesome Tanks 2",
+            "url": "https://hushygames.github.io/games/awesometanks2/game.html",
+            "image": "awesometanks2titlecard.png"
+        },
+        {
+            "id": 59,
+            "name": "Baseball Bros",
+            "url": "https://baseball-game.io/game/baseball-bros/",
+            "image": "baseballbrostitlecard.png"
+        },
+        {
+            "id": 60,
+            "name": "Microsoft Sudoku",
+            "url": "https://githubshrub.github.io/html5-games/games/ms-sudoku/",
+            "image": "sudokutitlecard.png"
+        },
+        {
+            "id": 61,
+            "name": "Idle Breakout",
+            "url": "https://buckyz.github.io/IdleBreakout/",
+            "image": "idlebreakouttitlecard.png"
+        },
+        {
+            "id": 62,
+            "name": "Idle Fill Factory",
+            "url": "https://buttertoasty.github.io/games2/idle%20fill%20factory/gamereal/index.html",
+            "image": "idlefillfactorytitlecard.png"
+        },
+        {
+            "id": 63,
+            "name": "Microsoft Word Games",
+            "url": "https://githubshrub.github.io/html5-games/games/ms-wordgames/#/",
+            "image": "mswordgamestitlecard.png"
+        },
+        {
+            "id": 64,
+            "name": "Adventure Capitalist",
+            "url": "https://than1089.github.io/adventure-capitalist/",
+            "image": "adventurecapitalisttitlecard.png"
+        },
+        {
+            "id": 65,
+            "name": "Mindsweeper",
+            "description": "New Version!",
+            "url": "https://minesweeper.online/",
+            "image": "msmindsweepertitlecard.png"
+        },
+        {
+            "id": 66,
+            "name": "Pacman",
+            "url": "https://masonicgit.github.io/pacman/",
+            "image": "pacmantitlecard.png"
+        },
+        {
+            "id": 67,
+            "name": "Donkey Kong",
+            "url": "https://3kh0s.github.io/games/donkeykong/index.html",
+            "image": "donkeykongtitlecard.png",
+            "alert": "Controls:\n\nArrow Keys - Movment\nEnter - Start/Select\nZ - Jump"
+        },
+        {
+            "id": 68,
+            "name": "Tetris",
+            "url": "https://3kh0s.github.io/games/tetris/index.html",
+            "image": "tetristitlecard.png"
+        },
+        {
+            "id": 69,
+            "name": "Casino Pack",
+            "url": "https://aaronrs2002.github.io/texas-holdem/",
+            "image": "casinopacktitlecard.png"
+        },
+        {
+            "id": 70,
+            "name": "Cookie Clicker",
+            "url": "https://games.president-of-the-math-team.com/cookieclicker/",
+            "image": "cookietitlecard.png",
+            "alert": "Please export your save from the previous version (Options --> Export Save) and import it into this (updated) one! The old one is getting removed soon!"
+        },
+        {
+            "id": 71,
+            "name": "Chicken Merge",
+            "url": "https://unblockedgames95.github.io/ChickenMerge/",
+            "image": "chickenmergetitlecard.png"
+        },
+        {
+            "id": 72,
+            "name": "Particle Clicker",
+            "url": "https://particle-clicker.github.io/particle-clicker/",
+            "image": "particleclickertitlecard.png"
+        },
+        {
+            "id": 73,
+            "name": "Idle Restaurant",
+            "url": "https://unblockedgames95.github.io/IdleRestaurants/",
+            "image": "idlerestauranttitlecard.png"
+        },
+        {
+            "id": 74,
+            "name": "Cozy Room Design",
+            "url": "https://fivenightsatfreddysonline.github.io/g3/class-327/",
+            "image": "cozyroomdesigntitlecard.png"
+        },
+        {
+            "id": 75,
+            "name": "Block Blast",
+            "url": "https://reunbozdo.github.io/",
+            "image": "blockblasttitlecard.png"
+        },
+        {
+            "id": 76,
+            "name": "Google Doodles",
+            "url": "https://games.president-of-the-math-team.com/google-doodles/",
+            "image": "googledoodletitlecard.png"
+        },
+        {
+            "id": 77,
+            "name": "Jumping Shell",
+            "url": "https://23azostore.github.io/s5/jumping-shell/",
+            "image": "jumpingshelltitlecard.png"
+        },
+        {
+            "id": 78,
+            "name": "Level Devil",
+            "url": "https://mochawoof.github.io/embeds/leveldevil/index.html",
+            "image": "levildeviltitlecard.png"
+        },
+        {
+            "id": 79,
+            "name": "Stickman Parkour 3",
+            "url": "https://cdn.unblocked-games-free.com/games/3089/NPsEdNys9tbqEI/211613/ib0zla7kkzuplcmmyxob9l2arf58ufmn/index.html",
+            "image": "stickmanparkour3titlecard.png"
+        },
+        {
+            "id": 80,
+            "name": "Cut The Rope",
+            "url": "https://jounhon.github.io/CutTheRope/",
+            "image": "cuttheropetitlecard.png"
+        },
+        {
+            "id": 81,
+            "name": "Candy Crush",
+            "url": "https://q10games.com/Candy_Crush/candy-crush/index.html",
+            "image": "candycrushtitlecard.png"
+        },
+        {
+            "id": 82,
+            "name": "Geometry Dash",
+            "url": "https://r8r7.github.io/jonathanrivera/games/geometrydash/",
+            "image": "geometrydashtitlecard.png"
+        },
+        {
+            "id": 83,
+            "name": "Ragdoll Hit",
+            "url": "https://freetoplayz.github.io/ragdoll-hit/",
+            "image": "ragdollhittitlecard.png"
+        },
+        {
+            "id": 84,
+            "name": "Bottle Flip 3D",
+            "url": "https://webglmath.github.io/bottle-flip-3d/",
+            "image": "bottlefliptitlecard.png"
+        },
+        {
+            "id": 85,
+            "name": "Julie Games",
+            "url": "https://girl-games.s3.amazonaws.com/index.html",
+            "image": "girlgamestitlecard.png",
+            "description": "Dress Up/Makeup Games"
+        },
+        {
+            "id": 86,
+            "name": "Big Flappy Tower Tiny Square",
+            "url": "https://strongdogxp.github.io/strongdog3/html/big%20flappy%20tower%20tiny%20square/game/index.html",
+            "image": "bfttstitlecard.png"
+        },
+        {
+            "id": 87,
+            "name": "Mini Metro",
+            "url": "https://auzgame.github.io/miniMetroLondon/",
+            "image": "minimetrotitlecard.png"
+        },
+        {
+            "id": 88,
+            "name": "1v1.LOL",
+            "url": "https://1v1-lolgame.github.io/file/",
+            "image": "1v1titlecard.png",
+            "hidden": true
+        },
+        {
+            "id": 89,
+            "name": "3 Goblets",
+            "url": "https://slope-game.github.io/three-goblets/",
+            "image": "3gobletstitlecard.png",
+            "fixedDate": "2025-09-09"
+        },
+        {
+            "id": 90,
+            "name": "Giant 2048",
+            "url": "https://nb-ga.github.io/games-site/projects/9007199254740992/index.html",
+            "image": "jumbo2048titlecard.png",
+            "alert": "If the game is not fully visible, zoom in and out using CTRL and + or - on your keyboard.",
+            "releaseDate": "2025-10-14"
+        },
+        {
+            "id": 91,
+            "name": "Hextris",
+            "url": "https://nb-ga.github.io/games-site/projects/hextris/index.html",
+            "image": "hextristitlecard.png",
+            "releaseDate": "2025-10-14"
+        },
+        {
+            "id": 92,
+            "name": "Spark Chess",
+            "url": "https://www.sparkchess.com/",
+            "image": "sparkchesstitlecard.png",
+            "releaseDate": "2025-10-16"
+        },
+        {
+            "id": 93,
+            "name": "Polytrack",
+            "url": "https://polytrack-online.github.io/file/",
+            "image": "polytracktitlecard.png",
+            "releaseDate": "2025-11-24"
+        },
+        {
+            "id": 94,
+            "name": "Super Mario 64",
+            "url": "https://r8r7.github.io/jonathanrivera/games/g/sm64/",
+            "image": "sm64titlecard.png",
+            "releaseDate": "2025-11-24"
+        },
+        {
+            "id": 95,
+            "name": "Super Mario Bros.",
+            "url": "https://23azostore.github.io/s9/super-mario-bros/",
+            "image": "smbtitlecard.png",
+            "releaseDate": "2025-11-24"
+        },
+        {
+            "id": 96,
+            "name": "Tomb of the Mask",
+            "url": "https://htmlxm.github.io/h8/tomb-of-the-mask/",
+            "image": "tombmasktitlecard.png",
+            "releaseDate": "2025-11-24"
+        },
+        {
+            "id": 97,
+            "name": "House of Hazards",
+            "url": "https://htmlxm.github.io/h/house-of-hazards/",
+            "image": "houseofhazardstitlecard.png",
+            "releaseDate": "2025-11-24"
+        },
+        {
+            "id": 98,
+            "name": "CSA Calculator",
+            "url": "https://csa.potmt.us/",
+            "image": "",
+            "description": "Calculate your class final grades!",
+            "fixedDate": "2025-12-16"
+        },
+        {
+            "id": 99,
+            "name": "Retro Games",
+            "url": "https://www.retrogames.cz/play_771-NES.php",
+            "image": "retrogamestitlecard.png",
+            "releaseDate": "2025-12-16"
+        },
+        {
+            "id": 100,
+            "name": "Frontwars",
+            "url": "https://frontwars.io/",
+            "image": "frontwarstitlecard.png",
+            "releaseDate": "2025-12-16"
+        },
+        {
+            "id": 101,
+            "name": "Red<br>Ball 4",
+            "url": "https://redball4online.github.io/file/",
+            "image": "redball4titlecard.png",
+            "releaseDate": "2025-12-16"
+        },
+        {
+            "id": 102,
+            "name": "Friday<br>Night<br>Funkin'",
+            "url": "https://mod.fnfhub.net/26860/",
+            "image": "funkintitlecard.png",
+            "releaseDate": "2026-01-05"
+        },
+        {
+            "id": 106,
+            "name": "Tunel Rush",
+            "url": "https://tunnelrush-game.github.io/embed/tunnel-rush.html",
+            "image": "ovotitlecard.png",
+            "releaseDate": "2026-01-05"
+        }
+    ],
+    "version": "1.0.3"
+}

@@ -1,0 +1,1184 @@
+<html>
+
+<head>
+
+
+    <title>New Tab</title>
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Coustard:wght@900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+        @keyframes glowingborder {
+            0% {
+                border-color: blue;
+            }
+
+            50% {
+                border-color: #1282DF;
+            }
+
+            100% {
+                border-color: blue;
+            }
+        }
+
+        @keyframes rotatebounce {
+            0% {
+                transform: rotate(2.5deg);
+            }
+
+            50% {
+                transform: rotate(-2.5deg);
+            }
+
+            100% {
+                transform: rotate(2.5deg);
+            }
+        }
+
+        #grayTransition {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: #2D3748;
+            transition: 1s;
+            z-index: 9;
+            display: none;
+        }
+
+        .title-container {
+            width: 500px;
+        }
+
+        .title-container input[type="text"] {
+            width: 400px;
+            padding: 18px;
+            color: black;
+            border-radius: 14px;
+            border: none;
+            opacity: .7;
+        }
+
+        .title-container input[type="text"]:not(:placeholder-shown) {
+            opacity: 1;
+        }
+
+        .title-container .updatebtn {
+            margin-left: 10px;
+            opacity: .7;
+            cursor: not-allowed;
+            width: 80px;
+        }
+
+        .title-container input[type="text"]:not(:placeholder-shown)+#titlebtn {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .title-container input[type="text"]:not(:placeholder-shown)+#titlebtn:hover {
+            background-color: #7c828d;
+        }
+
+        .title-container .titlepreset {
+            margin: 0 5px;
+        }
+
+        .title-container .titlepreset:hover {
+            background-color: #7c828d;
+        }
+
+        #game-selector {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #2D3748;
+            text-align: center;
+            scroll-behavior: auto;
+            overflow: auto;
+            transition: transform .75s, visibility 0s;
+            z-index: 10;
+            visibility: visible;
+        }
+
+        p,
+        a,
+        h1,
+        h2,
+        h3,
+        h4,
+        button,
+        input {
+            color: white;
+            font-family: "Roboto", serif;
+        }
+
+        button {
+            padding: 18px;
+            background-color: #626976;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        #game-selector h1 {
+            font-weight: 900;
+            font-size: 36px;
+        }
+
+        .game-list {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .game-card {
+            width: 136px;
+            height: 200px;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            border-radius: 14px;
+            box-shadow: 0px;
+            border: 8px #626976 solid;
+            transition: .1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            float: left;
+            margin: 20px;
+            user-select: none;
+            position: relative;
+        }
+
+        .game-card:hover {
+            transform: scale(110%);
+            box-shadow: 0 0 20px 8px rgba(255, 255, 255, 0.63);
+            border-color: white;
+            transition: .2s ease-out;
+        }
+
+        .game-card p {
+            text-align: center;
+            font-size: 28px;
+            margin: 8px 0;
+            font-weight: 800;
+            padding: 0 12px;
+        }
+
+        .game-card p i,
+        .game-card p b {
+            font-size: 14px;
+        }
+
+        .game-card:hover p {
+            font-size: 22px;
+            animation: rotatebounce infinite 1s linear;
+        }
+
+        .game-card:hover p i {
+            display: none;
+        }
+
+        .game-card:hover p b {
+            transition: .2s;
+            font-size: 16px;
+        }
+
+        .game-card button {
+            position: absolute;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0%);
+            padding: 12px 0px;
+            border-radius: 8px;
+            width: 100px;
+            margin: 4px 0;
+            background-color: #D3DBE6;
+            color: #0D0745;
+        }
+
+        .game-card button i {
+            margin-right: 5px;
+            color: #0D0745;
+            cursor: pointer;
+        }
+
+        .game-card:hover button {
+            position: static;
+            opacity: 1;
+            visibility: visible;
+            transform: scale(100%);
+            transition: opacity 0.3s ease, transform 0.3s cubic-bezier(.59, 0, .44, 1.4), visibility 0.3s ease;
+        }
+
+        .game-card button i.grayed {
+            color: #7d7d7d;
+        }
+
+        .game-card button i.favorited {
+            color: #FF0035;
+        }
+
+        .game-card button:hover {
+            transform: scale(110%);
+            transition: .15s;
+        }
+
+        .game-card-header {
+            font-family: 'Coustard', cursive;
+            padding: 5px 8px;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            border-radius: 4px;
+            color: white;
+            transform: translate(-50%, -50%);
+            filter: drop-shadow(0px 6px 3px rgba(0, 0, 0, 0.5));
+        }
+
+        .game-card-new {
+            background-color: #FF0035;
+        }
+
+        .game-card-fixed {
+            background-color: black;
+        }
+
+        #game-embed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .menu-bottom-right {
+            border-top-left-radius: 18px;
+            border: solid white 5px;
+            border-bottom-width: 0;
+            border-right-width: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .menu-bottom-left {
+            border-top-right-radius: 18px;
+            border: solid white 5px;
+            border-bottom-width: 0;
+            border-left-width: 0;
+            left: 0;
+            bottom: 0;
+        }
+
+        .menu-top-left {
+            border-bottom-right-radius: 18px;
+            border: solid white 5px;
+            border-top-width: 0;
+            border-left-width: 0;
+            left: 0;
+            top: 0;
+        }
+
+        .menu-top-right {
+            border-bottom-left-radius: 18px;
+            border: solid white 5px;
+            border-top-width: 0;
+            border-right-width: 0;
+            right: 0;
+            top: 0;
+        }
+
+        #menu {
+            position: fixed;
+            background-color: #2D3748;
+            z-index: 5;
+            width: 50px;
+            height: 50px;
+            transition: .5s, display 0s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #menu .options {
+            display: none;
+            transform: rotate(-180deg);
+            opacity: 0;
+            transition: .5s;
+        }
+
+        #menu p {
+            font-size: 36px;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        #menu.enlarged {
+            transform: scale(400%) translate(-20px, -20px);
+            animation: glowingborder infinite .5s linear;
+            cursor: default;
+        }
+
+        #menu:hover {
+            height: auto;
+            display: block;
+            width: auto;
+        }
+
+        #menu.enlarged:hover {
+            opacity: 1;
+            width: 50px;
+            height: 50px;
+        }
+
+        #menu:hover .options {
+            display: block;
+            opacity: 1;
+            transform: rotate(0deg);
+            overflow: hidden;
+            padding: 10px 25px;
+        }
+
+        #menu.enlarged:hover .options {
+            display: none;
+        }
+
+        #menu:hover .options p {
+            font-size: 24px;
+            margin: 4px 0;
+            cursor: pointer;
+            transition: .25s;
+            opacity: .8;
+        }
+
+        #menu-right p {
+            text-align: right;
+        }
+
+        #menu-left p {
+            text-align: left;
+        }
+
+        #menu:hover .options p i {
+            margin-left: 5px;
+        }
+
+        #menu:hover .options p:hover {
+            font-weight: 600;
+            opacity: 1;
+        }
+
+        #menu:hover .expand {
+            display: none;
+        }
+
+        #menu.enlarged:hover .expand {
+            display: block;
+        }
+
+        #menutext {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #2D3748;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 0;
+            z-index: 2;
+            transition: .75s;
+            transition-delay: .25s;
+        }
+
+        #menutext h1 {
+            transition: .75s;
+        }
+
+        #version,
+        #changelog {
+            transition: .25s;
+        }
+
+        #returnToGame {
+            display: none;
+        }
+
+        #returnToGame button {
+            margin: 20px 0 10px 0;
+            font-size: 20px;
+            padding: 24px;
+            border: white solid 2px;
+            background: none;
+            font-weight: 400;
+        }
+
+        #returnToGame button:hover {
+            opacity: 1;
+            font-weight: 600;
+        }
+
+        .fa-solid {
+            color: white;
+        }
+
+        .advancment-easteregg {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 800px;
+            z-index: 99999999;
+            transition: .5s;
+        }
+
+        .popup-window {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            background: #2D3748;
+            border: solid white 5px;
+            border-radius: 18px;
+            text-align: center;
+            scroll-behavior: auto;
+            overflow: auto;
+            transition: transform .75s, visibility 0s;
+            z-index: 9;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        .popup-window p {
+            padding: 0 20px;
+        }
+
+        .position-editor-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 10px;
+            width: 270px;
+            margin-left: 15px;
+        }
+
+        .position-editor-container button {
+            padding: 14px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .position-editor-container button:hover {
+            background-color: #7c828d;
+        }
+
+        .position-close-btn {
+            margin: 20px 0 21.440px 0;
+            font-size: 16px;
+            padding: 14px;
+            border: white solid 4px;
+            background: none;
+            opacity: .8;
+            font-weight: 400;
+            width: 150px;
+        }
+
+        .position-close-btn:hover {
+            opacity: 1;
+            font-weight: 600;
+        }
+
+        #save-button {
+            margin: 24px;
+            font-size: 20px;
+            padding: 24px;
+            background-color: #ff0035;
+            border: white solid 2px;
+        }
+
+        #save-button:hover {
+            opacity: 1;
+            font-weight: 600;
+            transition: .2s;
+        }
+
+        #save-button i {
+            margin-right: 10px;
+        }
+
+        #favorites #changes-saved {
+            margin-top: 12px;
+            margin-bottom: 0px;
+        }
+
+        #favorites-save-window {
+            z-index: 12;
+            display: block;
+            width: 500px;
+            user-select: none;
+        }
+
+        #favorites-save-window p {
+            margin-bottom: 0;
+        }
+
+        .blurred-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 11;
+            backdrop-filter: blur(6px);
+        }
+
+        kbd {
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 0.5em 1em;
+            margin: 10px 5px;
+            box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset;
+            background-color: #1E1E1E;
+            color: white;
+        }
+
+        #favorites-save-window kbd {
+            margin-bottom: 0;
+        }
+
+        #save-url {
+            text-decoration: none;
+        }
+
+        #save-url div {
+            padding: 18px;
+            background-color: #626976;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            text-align: center;
+            margin: 21.4px;
+            text-decoration: none;
+        }
+
+        #save-url .hidden-text {
+            color: #626976;
+            font-size: 0px;
+            visibility: hidden;
+            position: fixed;
+        }
+
+        #weeklyUpdate {
+            display: flex;
+            visibility: visible;
+            z-index: 12;
+            width: 400px;
+            height: 500px;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        .weekly-update-header {
+            background-color: white;
+            padding: 14px 16px 0 16px;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .weekly-update-header h2 {
+            font-size: 36px;
+            margin: 0;
+            color: #2D3748;
+            font-family: 'Coustard', cursive;
+        }
+
+        .weekly-update-header p {
+            color: #2D3748;
+        }
+
+        #weeklyUpdate .weekly-update-border-curve {
+            position: absolute;
+            bottom: 1px;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: translate(0, 100%);
+        }
+
+        #weeklyUpdate .weekly-update-border-curve svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 25px;
+        }
+
+        #weeklyUpdate .weekly-update-border-curve .shape-fill {
+            fill: white;
+        }
+
+        .weekly-update-main-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .weekly-update-main-container h3 {
+            margin: 8px;
+            margin-top: 16px;
+        }
+
+        .weekly-update-main-container p {
+            margin: 6px;
+            padding: 0 15%;
+        }
+
+        .weekly-update-game-icon {
+            border-radius: 1.25em;
+            position: absolute;
+            filter: drop-shadow(8px 8px 3px rgba(0, 0, 0, 0.5));
+        }
+
+        .weekly-update-game-icon:nth-child(2) {
+            top: 240px;
+            left: -70px;
+            width: 125px;
+            height: 125px;
+            transform: rotate(10deg);
+            z-index: 5;
+        }
+
+        .weekly-update-game-icon:nth-child(3) {
+            top: 330px;
+            left: -20px;
+            width: 100px;
+            height: 100px;
+            transform: rotate(-4deg);
+            z-index: 6;
+        }
+
+        .weekly-update-game-icon:nth-child(1) {
+            top: 125px;
+            left: -45px;
+            width: 140px;
+            height: 140px;
+            transform: rotate(-4deg);
+            z-index: 6;
+        }
+
+        .weekly-update-game-icon:nth-child(4) {
+            top: 410px;
+            left: -15px;
+            width: 110px;
+            height: 110px;
+            transform: rotate(6deg);
+            z-index: 7;
+        }
+
+        .weekly-update-game-icon:nth-child(5) {
+            top: 130px;
+            right: -40px;
+            width: 110px;
+            height: 110px;
+            transform: rotate(-6deg);
+            z-index: 5;
+            filter: drop-shadow(-8px 8px 3px rgba(0, 0, 0, 0.5));
+        }
+
+        .weekly-update-game-icon:nth-child(6) {
+            top: 225px;
+            right: -35px;
+            width: 125px;
+            height: 125px;
+            transform: rotate(5deg);
+            z-index: 6;
+            filter: drop-shadow(-8px 8px 3px rgba(0, 0, 0, 0.5));
+        }
+
+        .weekly-update-game-icon:nth-child(7) {
+            top: 330px;
+            right: -15px;
+            width: 95px;
+            height: 95px;
+            transform: rotate(-6deg);
+            z-index: 7;
+            filter: drop-shadow(-8px 8px 3px rgba(0, 0, 0, 0.5));
+        }
+
+        .weekly-update-game-icon:nth-child(8) {
+            top: 400px;
+            right: -15px;
+            width: 115px;
+            height: 115px;
+            transform: rotate(2deg);
+            z-index: 5;
+            filter: drop-shadow(-8px 8px 3px rgba(0, 0, 0, 0.5));
+        }
+
+        #weeklyUpdate-closetext {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 0);
+            z-index: 20;
+            text-align: center;
+            font-style: italic;
+        }
+
+        #searchinput {
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        #searchinput::placeholder {
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <img src="https://potmt.online/img/HowDidWeGetHere.png" style="display: none;" class="advancment-easteregg" />
+
+    <!-- Return to Menu Button -->
+
+    <div id="menu" style="display:none;" class="enlarged menu-bottom-right">
+        <p class="expand">&equiv;</p>
+        <div id="menu-right" class="options">
+            <p onclick="document.getElementById('game-embed').src = document.getElementById('game-embed').src">Reset
+                Game <i class="fa-solid fa-rotate-right"></i></p>
+            <p
+                onclick="document.getElementById('change-position').style.display = 'block';document.getElementById('menu').style.display='none';positionOpen = true;">
+                Change Position <i class="fa-solid fa-sliders"></i></p>
+            <p
+                onclick="if(confirm('This will report an issue with the game you are currently playing. To report other issues, use the google form in the full menu.\n\nWould you like to continue?')){fetch('https://script.google.com/macros/s/AKfycbyKcHblmVVLmZ_6Cr-C5nx2_3GteUD6LJPaVcxNS9rB3wCSWhFroTetIO1eoy1F6XY/exec?id=' + document.getElementById('game-embed').currentgame + '&action=error&key=POTMT-tracking-26').then(res => res.json()).then(data => {console.log('ID:', data.id);console.log('New Count:', data.new_count);}).catch(err => console.error(err));alert('Your report has been submitted! Thank you for helping improve POTMT!')}else{alert('Your report has been canceled. Thank you for helping improve POTMT!')}">
+                Report an Issue <i class="fa-solid fa-triangle-exclamation"></i>
+            </p>
+            <p onclick="document.getElementById('game-selector').style.display = 'block';">Full Menu <i
+                    class="fa-solid fa-up-right-and-down-left-from-center"></i></p>
+        </div>
+        <div id="menu-left" class="options" style="display: none;">
+            <p onclick="document.getElementById('game-embed').src = document.getElementById('game-embed').src"><i
+                    class="fa-solid fa-rotate-right"></i> Reset
+                Game</p>
+            <p
+                onclick="document.getElementById('change-position').style.display = 'block';document.getElementById('menu').style.display='none';positionOpen = true;">
+                <i class="fa-solid fa-sliders"></i> Change Position
+            </p>
+            <p
+                onclick="if(confirm('This will report an issue with the game you are currently playing. To report other issues, use the google form in the full menu.\n\nWould you like to continue?')){fetch('https://script.google.com/macros/s/AKfycbyKcHblmVVLmZ_6Cr-C5nx2_3GteUD6LJPaVcxNS9rB3wCSWhFroTetIO1eoy1F6XY/exec?id=' + document.getElementById('game-embed').currentgame + '&action=error&key=POTMT-tracking-26').then(res => res.json()).then(data => {console.log('ID:', data.id);console.log('New Count:', data.new_count);}).catch(err => console.error(err));alert('Your report has been submitted! Thank you for helping improve POTMT!')}else{alert('Your report has been canceled. Thank you for helping improve POTMT!')}">
+                <i class="fa-solid fa-triangle-exclamation"></i> Report an Issue
+            </p>
+            <p onclick="document.getElementById('game-selector').style.display = 'block';"><i
+                    class="fa-solid fa-up-right-and-down-left-from-center"></i> Full Menu</p>
+        </div>
+    </div>
+
+    <div id="change-position" class="popup-window">
+        <h1>Change Menu Position</h1>
+        <div class="position-editor-container">
+            <button onmouseover="addMenuClass('menu-top-left')" onmouseout="removeMenuClass('menu-top-left')"
+                onclick="setMenuClass('menu-top-left')">
+                Top Left
+            </button>
+            <button onmouseover="addMenuClass('menu-top-right')" onmouseout="removeMenuClass('menu-top-right')"
+                onclick="setMenuClass('menu-top-right')">
+                Top Right
+            </button>
+            <button onmouseover="addMenuClass('menu-bottom-left')" onmouseout="removeMenuClass('menu-bottom-left')"
+                onclick="setMenuClass('menu-bottom-left')">
+                Bottom Left
+            </button>
+            <button onmouseover="addMenuClass('menu-bottom-right')" onmouseout="removeMenuClass('menu-bottom-right')"
+                onclick="setMenuClass('menu-bottom-right')">
+                Bottom Right
+            </button>
+        </div>
+        <button class="position-close-btn"
+            onclick='document.getElementById("change-position").style.display = "none";menu.style.display = "";positionOpen = false;'>&#x2715;
+            Close</button>
+    </div>
+
+    <!-- Return to menu text -->
+
+    <div id="menutext">
+        <h1>Use the button on the bottom right to return to the menu!</h1>
+    </div>
+
+    <!-- Game Embed -->
+
+    <iframe id="game-embed" src="about:blank" frameborder="0" currentgame="100"></iframe>
+
+    <!-- Main Page -->
+
+    <div id="grayTransition" style></div>
+
+    <div id="favorites-save-window" class="popup-window" style="visibility: hidden;">
+        <h1>Save Changes</h1>
+        <p>Drag the box below to your bookmarks bar to save your changes, then click anywhere else to close this
+            menu!<br><br>If the bookmarks bar is not visible, unhide it with the
+            shortcut<br><kbd>CTRL</kbd>+<kbd>SHIFT</kbd>+<kbd>B</kbd></p>
+        <a id="save-url" onmousedown="dragged=true;" href="https://potmt.online">
+            <div><span class="hidden-text">POTMT Launcher - </span>Drag Me!</div>
+        </a>
+
+    </div>
+
+    <div id="favorites-blurred-background" class="blurred-background" onclick="closeFavorites();"
+        style="visibility: hidden;"></div>
+
+    <div id="weeklyUpdate" class="popup-window" onclick="closeWeeklyUpdate();" style="visibility: visible;">
+        <div class="weekly-update-header bubble">
+            <h2>Happy CSA Week!</h2>
+            <div class="weekly-update-border-curve">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                    preserveAspectRatio="none">
+                    <path d="M0,0V7.23C0,65.52,268.63,112.77,600,112.77S1200,65.52,1200,7.23V0Z" class="shape-fill">
+                    </path>
+                </svg>
+            </div>
+        </div>
+        <div class="weekly-update-main-container">
+            <h3>TO ALL YORK DUKES:</h3>
+            <p>I have launched a CSA grade calculator! All you need to do is paste in your grades from Powerschool, and
+                it will calculate your final grade based on your CSA score!<br><br>Check it out at <a
+                    href="https://csa.potmt.online" target="_blank">csa.potmt.online</a>, or as a new item in the
+                launcher!</p>
+        </div>
+    </div>
+
+    <p id="weeklyUpdate-closetext" style="visibility: visible;">- Click Anywhere to Close Window -</p>
+
+    <div id="weeklyUpdate-blurred-background" class="blurred-background" onclick="closeWeeklyUpdate();"
+        style="visibility: visible;"></div>
+
+    <div id="game-selector">
+
+        <h1>POTMT Unblocker</h1>
+        <p><i id="version">client version v3.6.3 - launcher version
+                IfYouSeeThisPleaseReportThisAsABugInTheGoogleFormWithThe-ID1 - games version
+                IfYouSeeThisPleaseReportThisAsABugInTheGoogleFormWithThe-ID2
+                <br></br><a target="_blank"
+                    href="https://docs.google.com/document/d/1v9ajotmNecet5XaoecaiNxgn7PdGwP2_-oWqww-sUcU/edit?usp=sharing">Get
+                    Support, Report a Bug, or Suggest a Game Here!</a></i>
+        </p>
+
+        <div id="returnToGame">
+            <button onclick="document.getElementById('game-selector').style.display = 'none';">&#x2715; Close
+                Menu/Return to Game</button>
+        </div>
+
+        <button onclick="saveFavorites();" id="save-button" style="display: none;"><i
+                class="fa-solid fa-floppy-disk"></i>Save
+            Changes to Favorites</button>
+
+        <div id="favorites" style="display:none;">
+            <h2 style="margin-bottom:0px;">Favorites</h2>
+            <p id="changes-saved"><i class="fa-solid fa-check"></i> All Changes Saved!</p>
+            <div class="game-list" id="favoritesList"></div>
+        </div>
+
+        <div id="generalheader">
+            <h2 style="margin-top: 28px;">Select a Game</h2>
+            <span class="title-container">
+                <input type="text" id="urlinput" placeholder="Or type an URL here ( ex. 'https://example.com' )">
+                <button class="updatebtn" id="titlebtn"
+                    onclick="updateURL(document.getElementById('urlinput').value, true);">Go</button>
+            </span>
+            <br>
+            <span class="title-container">
+                <input style="width: 494px;" type="text" id="searchinput" placeholder="or search for a game here..."
+                    oninput="updateSearch(this.value);">
+            </span>
+        </div>
+
+        <div class="game-list" id="gameList"></div>
+        <p>Want another game? Suggest it <a href="https://forms.gle/Cw16KPVqNniCWNhW9" target="_blank">here</a>!</p>
+    </div>
+
+
+    <script>
+        var dragged = false;
+
+        function updateSearch(text) {
+
+            let gameList = document.getElementById("gameList");
+
+            if (text == "") {
+                Array.from(gameList.children).forEach(game => {
+                    game.style.display = "flex";
+                });
+                return;
+            }
+
+            Array.from(gameList.children).forEach(game => {
+                if (game.getElementsByTagName("p")[0].innerText.toLowerCase().replaceAll("\n", "").includes(text.toLowerCase())) {
+                    game.style.display = "flex";
+                } else {
+                    game.style.display = "none";
+                }
+            });
+        }
+
+        function saveFavorites() {
+            dragged = false;
+
+            document.getElementById('save-url').href = location.href
+            document.getElementById('favorites-blurred-background').style.visibility = 'visible';
+            document.getElementById('favorites-save-window').style.visibility = 'visible';
+        }
+
+        function closeFavorites() {
+            document.getElementById('favorites-blurred-background').style.visibility = 'hidden';
+            document.getElementById('favorites-save-window').style.visibility = 'hidden';
+            if (dragged) {
+                document.getElementById('save-button').style.display = 'none';
+                document.getElementById('changes-saved').style.display = 'block';
+            }
+        }
+
+        function updateURL(url, isCustom) {
+            console.log(`Updating URL to ${url}, isCustom: ${isCustom}`);
+            if (isCustom) {
+                if (url == "potmt.vreport") {
+                    let message = `Games Version: ${gamesVersion}`;
+                    console.log(message);
+                    document.write(message);
+                }
+                if (!url.includes("http")) {
+                    url = "https://" + url;
+                }
+            }
+            if (document.getElementById('menutext') != null) {
+                setTimeout(() => {
+                    document.getElementById('menu').classList.remove('enlarged');
+                    document.getElementById('menutext').remove();
+                }, 3000);
+                setTimeout(() => {
+                    document.getElementById('menutext').style.opacity = '0';
+                    document.getElementById('menutext').getElementsByTagName('h1')[0].style.fontSize = '0px';
+                }, 2000);
+                document.getElementById('game-selector').style.display = 'none';
+                document.getElementById('returnToGame').style.display = 'block';
+            } else {
+                document.getElementById('grayTransition').style.display = 'block';
+                document.getElementById('returnToGame').style.display = 'none';
+                document.getElementById('game-selector').style.transform = 'scale(0)';
+                document.getElementById('game-selector').style.overflow = 'hidden';
+                setTimeout(() => {
+                    document.getElementById('grayTransition').style.opacity = '0';
+                }, 500);
+                setTimeout(() => {
+                    document.getElementById('game-selector').style.display = 'none';
+                    document.getElementById('grayTransition').style.display = 'none';
+                }, 1500);
+                setTimeout(() => {
+                    document.getElementById('returnToGame').style.display = 'block';
+                    document.getElementById('game-selector').style.transform = 'scale(100%)';
+                    document.getElementById('game-selector').style.overflow = 'auto';
+                    document.getElementById('grayTransition').style.opacity = '1';
+                }, 2000);
+            }
+            document.getElementById('menu').style.display = 'flex';
+            document.getElementById('game-embed').src = url;
+        }
+
+        var firstUpdate = true;
+
+        async function favoriteScript(element) {
+            /*
+            const gameLookupJSON = await fetch("https://potmt.online/games-lookup.json", { method: 'GET' }).then(res => res.json()).catch(err => console.error(err));
+            const gameLookup = gameLookupJSON.lookup;
+            const gameReverseLookup = gameLookupJSON.reverse;
+            */
+
+            let icon = element.getElementsByTagName("i")[0];
+            let text = element.getElementsByTagName("t")[0];
+            let card = element.parentElement;
+            let elementNumber = card.id.replace("gamecard-", "");
+            let cardNumber = card.saveid;
+            let favoritesList = document.getElementById("favoritesList");
+            let gameList = document.getElementById("gameList");
+            let list = null;
+
+            if (icon.classList.contains("grayed")) {
+                icon.classList.remove("grayed");
+                icon.classList.add("favorited");
+                text.innerHTML = "Favorited";
+                list = favoritesList;
+
+                if (location.hash == "") {
+                    location.hash = "#favs=" + cardNumber;
+                } else {
+                    location.hash = location.hash + "," + cardNumber;
+                }
+
+            } else {
+
+                icon.classList.remove("favorited");
+                icon.classList.add("grayed");
+                text.innerHTML = "Favorite";
+                list = gameList;
+
+                let newHash = "#favs=";
+                let favArray = location.hash.replace("#favs=", "").split(",");
+                console.log(favArray);
+                favArray.forEach(favNum => {
+                    if (favNum != cardNumber) {
+                        newHash = newHash + "," + favNum;
+                    }
+                })
+
+                newHash = newHash.replace("#favs=,", "#favs=")
+
+                location.hash = newHash;
+
+            }
+
+            var newDisplay = "none";
+
+            if (list.children.length == 0) {
+                list.appendChild(card);
+                if (list == favoritesList) {
+                    document.getElementById("favorites").style.display = "";
+                } else {
+                    document.getElementById("generalheader").style.display = "";
+                }
+                showSaveButton();
+                return;
+            }
+
+            var insertElement = null;
+            var offset = elementNumber;
+            offset++;
+            console.log(offset);
+            while (insertElement == null) {
+                console.log("Trying " + offset)
+                var attempt = document.getElementById("gamecard-" + offset);
+                offset--;
+                if (attempt != null && attempt.parentElement == list) {
+                    console.log(elementNumber + " (card) compared to (offset) " + offset);
+                    insertElement = attempt;
+                    if (offset < elementNumber || offset == 0) {
+                        console.log("inserting after");
+                        insertElement.after(card);
+                    } else {
+                        console.log("inserting before");
+                        list.insertBefore(card, insertElement);
+                    }
+                }
+                if (offset < 0) {
+                    list.prepend(card);
+                    insertElement = true;
+                }
+            }
+
+            if (favoritesList.children.length == 0) {
+                document.getElementById("favorites").style.display = "none";
+                location.hash = "";
+            } else if (gameList.children.length == 0) {
+                document.getElementById("generalheader").style.display = "none";
+                var advancmentimg = document.getElementsByClassName("advancment-easteregg")[0];
+                advancmentimg.style.display = "";
+                setTimeout(() => {
+                    advancmentimg.style.width = "300px";
+                }, 250);
+                setTimeout(() => {
+                    advancmentimg.style.transform = "translate(0%, -100%)";
+                    advancmentimg.style.opacity = "0";
+                }, 10000);
+                setTimeout(() => {
+                    advancmentimg.remove();
+                }, 11000);
+            }
+
+            console.log("calling showSaveButton");
+            showSaveButton();
+
+        }
+
+        function showSaveButton() {
+            console.log("showSaveButton called");
+            document.getElementById('save-button').style.display = "inline-block";
+            document.getElementById('changes-saved').style.display = "none";
+
+            if (firstUpdate) {
+                firstUpdate = false;
+                document.getElementById('game-selector').getElementsByTagName('h1')[0].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        var menuSelectedPosition = "menu-bottom-right";
+        var positionOpen = false;
+
+        // Function to add the class on hover
+        function addMenuClass(className) {
+            const menu = document.getElementById('menu');
+            menu.classList.remove(menuSelectedPosition);
+            menu.classList.add(className);
+            menu.style.display = "";
+        }
+
+        // Function to remove the class when hover ends
+        function removeMenuClass(className) {
+            if (!positionOpen) return;
+            const menu = document.getElementById('menu');
+            menu.classList.remove(className);
+            menu.classList.add(menuSelectedPosition);
+            menu.style.display = "none";
+        }
+
+        // Function to set the class permanently on click
+        function setMenuClass(className) {
+            menuSelectedPosition = className;
+            const menu = document.getElementById('menu');
+            menu.classList.add(className); // Replace all classes with the new one
+            document.getElementById('change-position').style.display = "none";
+            menu.style.display = "";
+            positionOpen = false;
+
+            if (className.includes("left")) {
+                document.getElementById('menu-right').style.display = "none";
+                document.getElementById('menu-left').style.display = "";
+            } else {
+                document.getElementById('menu-right').style.display = "";
+                document.getElementById('menu-left').style.display = "none";
+            }
+        }
+
+        function closeWeeklyUpdate() {
+            document.getElementById('weeklyUpdate-blurred-background').style.visibility = 'hidden';
+            document.getElementById('weeklyUpdate').style.visibility = 'hidden';
+            document.getElementById('weeklyUpdate-closetext').style.visibility = 'hidden';
+        }
+
+    </script>
+
+
+    <script src="https://kit.fontawesome.com/7a44989741.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

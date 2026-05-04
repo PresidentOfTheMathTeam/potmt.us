@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POTMT Client v4</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: #FFF;
+            font-family: sans-serif;
+            color: gray;
+            overflow: hidden;
+        }
+
+        .picker {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #111;
+            scrollbar-width: none;
+            padding-right: 60px;
+            --mask:
+                radial-gradient(134.16px at calc(100% - 180px) 50%, #000 99%, #0000 101%) 0 calc(50% - 120px)/100% 240px,
+                radial-gradient(134.16px at calc(100% + 120px) 50%, #0000 99%, #000 101%) calc(100% - 60px) 50%/100% 240px repeat-y;
+            -webkit-mask: var(--mask);
+            mask: var(--mask);
+        }
+
+        .spacer {
+            height: 50vh;
+            /* Half screen height */
+            flex-shrink: 0;
+        }
+
+        .picker .header {
+            margin-bottom: 1em;
+        }
+
+        .item {
+            scroll-snap-align: center;
+            font-size: 2.25rem;
+            padding: 5px 0;
+            font-weight: 400;
+            text-align: center;
+            width: 100%;
+            color: gray;
+            transition: all 0.2s ease;
+            transform: scale(1);
+            cursor: pointer;
+        }
+
+        .item.active {
+            color: white;
+            font-weight: 700;
+            transform: scale(1.2);
+        }
+
+        .select-title {
+            margin-bottom: 1em;
+            font-size: 3rem;
+        }
+
+        .menu-container {
+            background-color: #484952;
+            height: 100%;
+            width: 100%;
+            transition: .15s;
+        }
+
+        .info {
+            width: 50%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: none;
+        }
+
+        .info .preview-canvas {
+            width: 20rem;
+            height: 20rem;
+            border-radius: 2em;
+        }
+
+        .description-container {
+            background-color: rgba(255, 255, 255, .2);
+            padding: 3em;
+            width: 20em;
+            border-radius: 2em;
+        }
+
+        .description {
+            font-size: 1.5rem;
+            color: #FFF;
+            text-align: center;
+            margin: 1em 0 0 0;
+            height: 4em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toggle-active {
+            text-decoration: underline;
+        }
+
+        .toggle-inactive {
+            color: gray;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menu-container">
+        <div class="info">
+            <div class="description-container">
+                <img class="preview-canvas" src="https://getpotmt.online/img/canvas/canvasicon.png">
+                <p class="description">Scroll or use the arrow keys to select a game, then press enter to launch it!</p>
+            </div>
+        </div>
+        <div class="picker">
+            <div class="spacer"></div>
+            <div class="item select-title" clickdisabled img="canvasicon.png"
+                desc="Scroll or use the arrow keys to select a game, then press enter to launch it!">POTMT Unblocker
+            </div>
+            <div class="item select-title" clickdisabled img="canvasicon.png"
+                desc="Click to toggle between your favorites and all games."><u class="toggle-active">All Games</u> - <u class="toggle-inactive">Favorites</u>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        let gameSelectEnabled = true;
+
+        let picker = document.querySelector('.picker');
+        let items = Array.from(document.querySelectorAll('.item'));
+        let activeIndex;
+
+        // Preload images and store them in a map
+        let imageCache = {};
+
+        // Scroll smoothly to a specific item
+        function scrollToItem(index) {
+            picker.scrollTo({
+                top: items[index].offsetTop - picker.clientHeight / 2 + items[index].clientHeight / 2,
+                behavior: 'smooth'
+            });
+        }
+
+        // Update which item is active based on index
+        function setActive(index) {
+            if (activeIndex == index) return; // Ignore if already active
+
+            items.forEach(item => item.classList.remove('active'));
+            items[index].classList.add('active');
+            activeIndex = index;
+
+            // Update description
+            document.querySelector('.description').innerHTML = items[index].getAttribute('desc') || 'No description available';
+
+            // Update preview image using preloaded images
+            const imgKey = items[index].getAttribute('img') || 'canvasicon.png';
+            const preloadedImg = imageCache[imgKey];
+            if (preloadedImg) {
+                document.querySelector('.preview-canvas').src = preloadedImg.src;
+            }
+
+            // Update alt text
+            document.querySelector('.preview-canvas').alt = items[index].textContent;
+
+            // Update background color
+            document.querySelector('.menu-container').style.backgroundColor = items[index].getAttribute('desccolor') || '#484952';
+        }
+
+        // Detect which item is in the center during scroll
+        function updateActiveFromScroll() {
+            let center = picker.scrollTop + picker.clientHeight / 2;
+
+            let closestIndex = 0;
+            let closestDistance = Infinity;
+
+            items.forEach((item, index) => {
+                let itemCenter = item.offsetTop + item.clientHeight / 2;
+                let distance = Math.abs(center - itemCenter);
+
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestIndex = index;
+                }
+            });
+
+            setActive(closestIndex);
+        }
+
+        // Clicking on items
+        items.forEach((item, index) => {
+            item.addEventListener('click', () => {
+
+                if (!gameSelectEnabled) return; // Ignore if game select is not enabled
+
+                if (index === activeIndex) {
+                    myFunction();
+                } else {
+                    setActive(index);
+                    scrollToItem(index);
+                }
+            });
+        });
+
+        // Keyboard controls
+        document.addEventListener('keydown', e => {
+
+            if (!gameSelectEnabled) return; // Ignore if game select is not enabled
+
+            if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (activeIndex > 0) {
+                    setActive(activeIndex - 1);
+                    scrollToItem(activeIndex);
+                }
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (activeIndex < items.length - 1) {
+                    setActive(activeIndex + 1);
+                    scrollToItem(activeIndex);
+                }
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                myFunction();
+            }
+        });
+
+        // Update highlight while scrolling
+        picker.addEventListener('scroll', () => {
+            if (gameSelectEnabled) {
+                updateActiveFromScroll();
+            }
+        });
+
+        // Start with Week 1 centered
+        window.addEventListener('load', async () => {
+            await loadGames();
+            scrollToItem(0);
+            setActive(0);
+        });
+
+
+        // Run when pressing Enter or clicking selected item
+        function myFunction() {
+            let item = items[activeIndex];
+
+            if (item.getAttribute('clickdisabled') !== null) return;
+
+            alert(`Selected: ${item.textContent}`);
+        }
+
+        async function loadGames() {
+            const gameIDsFetch = await fetch("https://president-of-the-math-team.com/v4-games.json", { method: 'GET', cache: 'no-store' }).then(res => res.json()).catch(err => console.error(err));
+            const gamesVersion = gameIDsFetch.version;
+            const gameIDs = gameIDsFetch.list;
+
+            gameIDs.sort((a, b) => a.name.replace("<br>", "").localeCompare(b.name.replace("<br>", "")));
+
+            let newGames = [];
+            let regularGames = [];
+
+            gameIDs.forEach(game => {
+                let newGame = false;
+
+                if (game.releaseDate) {
+                    let releaseDate = new Date(game.releaseDate + " 00:00");
+                    if (releaseDate > new Date()) {
+                        return;
+                    }
+
+                    let weekFromRelease = new Date(releaseDate);
+                    weekFromRelease.setDate(releaseDate.getDate() + 2);
+
+                    if (weekFromRelease > new Date()) {
+                        newGame = true;
+                    }
+                }
+
+                if (game.hidden) return;
+
+                // Separate games into newGames and regularGames
+                if (newGame) {
+                    newGames.push(game);
+                } else {
+                    regularGames.push(game);
+                }
+            });
+
+            // Combine newGames and regularGames, with newGames appearing first
+            const sortedGames = [...newGames, ...regularGames];
+
+            sortedGames.forEach(game => {
+                console.log("sorting")
+                let item = document.createElement('div');
+                item.className = 'item';
+                item.textContent = game.name.replace("<br>", " ");
+                if (game.image) item.setAttribute('img', game.image);
+                if (game.description) item.setAttribute('desc', game.description);
+                if (game.url) item.setAttribute('url', game.url);
+                if (game.id) item.setAttribute('id', game.id);
+                if (game.color) item.setAttribute('desccolor', game.color);
+                item.addEventListener('click', () => {
+                    if (gameSelectEnabled) {
+                        myFunction();
+                    }
+                });
+
+                const imgSrc = "https://getpotmt.online/img/canvas/" + (game.image || 'canvasicon.png');
+                const img = new Image();
+                img.src = imgSrc;
+                imageCache[game.image] = img; // Store the preloaded image in the cache
+                
+                picker.appendChild(item);
+
+            })
+
+            let canvasicon = new Image();
+            canvasicon.src = "https://getpotmt.online/img/canvas/canvasicon.png";
+            imageCache['canvasicon.png'] = canvasicon; // Preload the default canvas icon
+
+            let spacer = document.createElement('div');
+            spacer.className = 'spacer';
+            picker.appendChild(spacer);
+
+            items = Array.from(document.querySelectorAll('.item'));
+        }
+
+    </script>
+
+</body>
+
+</html>
